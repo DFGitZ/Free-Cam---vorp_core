@@ -10,6 +10,7 @@ local carried = false
 local Done = false
 local T = Translation[Lang].MessageOfSystem
 local keepdown
+local UseControlsCamera = Config.UseControlsCamera 
 
 RegisterNetEvent('vorp:SelectedCharacter', function() 
     DeathCam2()
@@ -21,7 +22,7 @@ function DeathCam1()
         while true do
             Citizen.Wait(1)
             
-            if (deadcam and Dead) then
+            if UseControlsCamera and (deadcam and Dead) then 
                 ProcessCamControls()
             end
         end
@@ -35,7 +36,9 @@ function DeathCam2()
             Citizen.Wait(500)
             if not Dead and IsPedDeadOrDying(ped) then
                 Dead = true
-                StartDeathCam()
+                if UseControlsCamera then -- Check UseControlsCamera flag
+                    StartDeathCam()
+                end
             elseif Dead and not IsPedDeadOrDying(ped) then
                 Dead = false
                 EndDeathCam()
@@ -276,7 +279,9 @@ CreateThread(function()
                 AnimpostfxPlay("PauseMenuIn") -- Play the animpostfx effect when the player dies
                 CreateThread(function()
                     RespawnTimer()
-                    StartDeathCam()
+                    if UseControlsCamera then -- Check UseControlsCamera flag
+                        StartDeathCam()
+                    end
                 end)
             end
             if not PressKey and setDead then
