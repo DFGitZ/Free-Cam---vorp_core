@@ -8,3 +8,9 @@ vorp_core\client\replace (file above)
 Preview
 
 https://streamable.com/6c99sh
+
+
+
+***UPDATE****
+
+The camera is already active in config.lua with UseControlsCamera, the next update will be to pass the text to language.lua.
